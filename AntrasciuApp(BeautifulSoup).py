@@ -1,26 +1,30 @@
 import requests
 from bs4 import BeautifulSoup
-citatos = []
-autoriai = []
-url = 'http://quotes.toscrape.com/'
+import random
 
+url = 'https://www.delfi.lt/'
 r = requests.get(url).text
-soup = BeautifulSoup(r, 'html.parser')
-def citatos_traukimas():
-    find = soup.find_all(class_='text')
-    for quote in find:
-        x = quote.get_text()
-        citatos.append(x)
-    return citatos
-citatos_traukimas()
+soup = BeautifulSoup(r, "html.parser")
+antrastes = soup.find_all(class_='CBarticleTitle')
 
-def vardo_traukimas():
-    find = soup.find_all(class_='quote')
-    for quote in find:
-        x = quote.get_text().split('by')[1]
-        autoriai.append(x)
-        return autoriai
+tuscias_listas = []
+pries = []
+po = []
+final_list = []
+sk = 0
+for antraste in antrastes:
+    x = antraste.get_text()
+    if ':' in x:
+        tuscias_listas.append(x)
 
-citatos_traukimas()
-vardo_traukimas()
-print(autoriai)
+for i in tuscias_listas:
+    pries.append(i.split(':')[0])
+    po.append(i.split(':')[1])
+
+# print(pries)
+random.shuffle(po)
+for item in pries:
+    final_list.append(item + ':' + po[sk])
+    sk += 1
+
+print(*final_list, sep = "\n") 
