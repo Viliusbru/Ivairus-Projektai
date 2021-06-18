@@ -17,10 +17,10 @@ def funkcija(emailas, subject, zinute):
 
 
     with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
-        smtp.ehlo() # žiūrėkite, kaip į pasisveikinimą su serveriu
-        smtp.starttls() # inicijuojame šifruotą kanalą
-        smtp.login('bandymas147852@gmail.com', password) # nurodome prisijungimo duomenis
-        smtp.send_message(email) # išsiunčiame žinutę
+        smtp.ehlo() 
+        smtp.starttls()
+        smtp.login('bandymas147852@gmail.com', password)
+        smtp.send_message(email)
 
 
 funkcija('viliusbru@gmail.com','asdasd','asdasdasdasd')
